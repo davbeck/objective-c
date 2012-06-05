@@ -15,23 +15,30 @@
 @implementation NSString (NPMimeType)
 
 - (NSString *)mimeType
-{	
-	NSString *pathExtension = [self pathExtension];
-	if (pathExtension == nil || [pathExtension isEqualToString:@""])
-		return @"application/octet-stream";
+{
+    NSString *mimeType = @"application/octet-stream";
+    
+    
+	CFStringRef pathExtension = CFBridgingRetain([self pathExtension]);
+    
+	if (pathExtension != NULL && CFStringGetLength(pathExtension) > 0) {
+        CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension, NULL);
+        
+        if (UTI != NULL) {
+            CFStringRef registeredType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
+            
+            if (registeredType != nil) {
+                mimeType = CFBridgingRelease(registeredType);
+            }
+        }
+        
+        CFRelease(UTI);
+    }
+    
+    CFRelease(pathExtension);
 	
-    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (CFStringRef)pathExtension, NULL);
-    if (UTI == nil) 
-		return @"application/octet-stream";
-	
-    CFStringRef registeredType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
-	if (registeredType == nil) {
-		CFRelease(UTI);
-		return @"application/octet-stream";
-	}
-	
-	CFRelease(UTI);
-    return [(NSString *)registeredType autorelease];
+    
+    return mimeType;
 }
 
 @end

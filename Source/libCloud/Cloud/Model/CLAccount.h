@@ -30,14 +30,14 @@ typedef NSInteger CLAccountType;
 	CLSocket *_socket;
 }
 
-@property (nonatomic, readwrite, retain) NSURL *domain;
-@property (nonatomic, readwrite, retain) NSURL *domainHomePage;
+@property (nonatomic, readwrite, strong) NSURL *domain;
+@property (nonatomic, readwrite, strong) NSURL *domainHomePage;
 @property (nonatomic, readwrite, assign, getter = isAlphaUser) BOOL alphaUser;
 @property (nonatomic, readwrite, assign) BOOL uploadsArePrivate;
 @property (nonatomic, readwrite, copy) NSString *email;
-@property (nonatomic, readwrite, retain) NSDate *subscriptionExpiresAt;
+@property (nonatomic, readwrite, strong) NSDate *subscriptionExpiresAt;
 @property (nonatomic, readwrite, assign) CLAccountType type;
-@property (nonatomic, readwrite, retain) CLSocket *socket;
+@property (nonatomic, readwrite, strong) CLSocket *socket;
 
 - (id)initWithEmail:(NSString *)anEmail;
 + (id)accountWithEmail:(NSString *)anEmail;

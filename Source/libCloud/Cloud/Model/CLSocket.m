@@ -53,10 +53,10 @@ static NSString *const CLSocketChannelsKey = @"CLSocketChannelsKey";
 {
 	if ((self = [super init])) {
 		if ([decoder allowsKeyedCoding]) {
-			_APIKey   = [[decoder decodeObjectForKey:CLSocketAPIKeyKey] retain];
+			_APIKey   = [decoder decodeObjectForKey:CLSocketAPIKeyKey];
 			_appID    = [decoder decodeIntegerForKey:CLSocketAppIDKey];
-			_authURL  = [[decoder decodeObjectForKey:CLSocketAuthURLKey] retain];
-			_channels = [[decoder decodeObjectForKey:CLSocketChannelsKey] retain];
+			_authURL  = [decoder decodeObjectForKey:CLSocketAuthURLKey];
+			_channels = [decoder decodeObjectForKey:CLSocketChannelsKey];
 		}
 	}
 	return self;
@@ -75,16 +75,5 @@ static NSString *const CLSocketChannelsKey = @"CLSocketChannelsKey";
 #pragma mark -
 #pragma mark Memory management
 
-- (void)dealloc
-{
-	[_APIKey release];
-    _APIKey = nil;
-	[_authURL release];
-    _authURL = nil;
-	[_channels release];
-    _channels = nil;
-	
-	[super dealloc];
-}
 
 @end

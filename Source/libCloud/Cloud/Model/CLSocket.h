@@ -21,7 +21,7 @@ extern NSString *const CLSocketItemsChannel;
 
 @property (nonatomic, readwrite, copy) NSString *APIKey;
 @property (nonatomic, readwrite, assign) NSInteger appID;
-@property (nonatomic, readwrite, retain) NSURL *authURL;
-@property (nonatomic, readwrite, retain) NSDictionary *channels;
+@property (nonatomic, readwrite, strong) NSURL *authURL;
+@property (nonatomic, readwrite, strong) NSDictionary *channels;
 
 @end

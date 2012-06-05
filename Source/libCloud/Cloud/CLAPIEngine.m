@@ -59,19 +59,19 @@ NSString *const CLAPIEnginePrivacyOptionPublic = @"public";
 		_delegate      = aDelegate;
 		_transactions  = [[NSMutableSet alloc] init];
 		_clearsCookies = NO;
-        _baseURL       = [[[self class] defaultBaseURL] retain];
+        _baseURL       = [[self class] defaultBaseURL];
 	}
 	return self;
 }
 
 + (id)engine
 {
-	return [[[[self class] alloc] init] autorelease];
+	return [[[self class] alloc] init];
 }
 
 + (id)engineWithDelegate:(id<CLAPIEngineDelegate>)aDelegate
 {
-	return [[[[self class] alloc] initWithDelegate:aDelegate] autorelease];
+	return [[[self class] alloc] initWithDelegate:aDelegate];
 }
 
 - (BOOL)isReady
@@ -469,7 +469,7 @@ NSString *const CLAPIEnginePrivacyOptionPublic = @"public";
 
 - (void)cancelAllConnections
 {
-	NSMutableSet *transCopy = [[self.transactions mutableCopy] autorelease];
+	NSMutableSet *transCopy = [self.transactions mutableCopy];
 	for (CLAPITransaction *transaction in transCopy) {
 		[self cancelConnection:transaction.identifier];
 	}
@@ -813,7 +813,6 @@ NSString *const CLAPIEnginePrivacyOptionPublic = @"public";
 	transaction.connection = connection;
 	[self.transactions addObject:transaction];
 	[connection start];
-	[connection release];
 	
 	return transaction.identifier;
 }
@@ -847,15 +846,8 @@ NSString *const CLAPIEnginePrivacyOptionPublic = @"public";
 {
     [self cancelAllConnections];
     
-    [_email release];
-	_email = nil;
-    [_password release];
-	_password = nil;
 	_delegate = nil;
-    [_transactions release];
-	_transactions = nil;
 	
-	[super dealloc];
 }
 
 @end

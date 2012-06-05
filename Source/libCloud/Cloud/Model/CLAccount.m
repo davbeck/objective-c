@@ -8,6 +8,8 @@
 
 #import "CLAccount.h"
 
+#import "CLSocket.h"
+
 
 static NSString * const CLAccountDomainKey            = @"CLAccountDomainKey";
 static NSString * const CLAccountDomainHomepageKey    = @"CLAccountDomainHomepageKey";
@@ -27,7 +29,7 @@ static NSString * const CLAccountSocketKey            = @"CLAccountSocketKey";
 
 + (id)accountWithEmail:(NSString *)anEmail
 {
-	return [[[[self class] alloc] initWithEmail:anEmail] autorelease];
+	return [[[self class] alloc] initWithEmail:anEmail];
 }
 
 - (id)init
@@ -67,14 +69,14 @@ static NSString * const CLAccountSocketKey            = @"CLAccountSocketKey";
 {
 	if ((self = [super init])) {
 		if ([decoder allowsKeyedCoding]) {
-			_domain                = [[decoder decodeObjectForKey:CLAccountDomainKey] retain];
-			_domainHomePage        = [[decoder decodeObjectForKey:CLAccountDomainHomepageKey] retain];
+			_domain                = [decoder decodeObjectForKey:CLAccountDomainKey];
+			_domainHomePage        = [decoder decodeObjectForKey:CLAccountDomainHomepageKey];
 			_alphaUser             = [decoder decodeBoolForKey:CLAccountAlphaUserKey];
 			_uploadsArePrivate     = [decoder decodeBoolForKey:CLAccountUploadsArePrivateKey];
-			_email                 = [[decoder decodeObjectForKey:CLAccountEmailKey] retain];
-            _subscriptionExpiresAt = [[decoder decodeObjectForKey:CLAccountExpiresAtKey] retain];
+			_email                 = [decoder decodeObjectForKey:CLAccountEmailKey];
+            _subscriptionExpiresAt = [decoder decodeObjectForKey:CLAccountExpiresAtKey];
 			_type                  = [decoder decodeIntegerForKey:CLAccountTypeKey];
-			_socket                = [[decoder decodeObjectForKey:CLAccountSocketKey] retain];
+			_socket                = [decoder decodeObjectForKey:CLAccountSocketKey];
 		}
 	}
 	return self;
@@ -97,20 +99,5 @@ static NSString * const CLAccountSocketKey            = @"CLAccountSocketKey";
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc
-{
-    [_email release];
-	_email = nil;
-    [_domain release];
-	_domain = nil;
-    [_domainHomePage release];
-    _domainHomePage = nil;
-    [_subscriptionExpiresAt release];
-    _subscriptionExpiresAt = nil;
-	[_socket release];
-    _socket = nil;
-	
-	[super dealloc];
-}
 
 @end

@@ -69,7 +69,7 @@
 		return nil;
 	}
 	
-	CLSocket *socket = [[[CLSocket alloc] init] autorelease];
+	CLSocket *socket = [[CLSocket alloc] init];
 	socket.APIKey    = [self _normalizedObjectFromDictionary:jsonDict forKey:@"api_key"];
 	socket.appID     = [[self _normalizedObjectFromDictionary:jsonDict forKey:@"app_id"] intValue];
 	socket.authURL   = [self _URLFromDictionary:jsonDict forKey:@"auth_url"];
@@ -256,7 +256,6 @@
 		// Set locale to US to avoid formatting issues
 		NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"US"];
 		[dateFormatter setLocale:locale];
-		[locale release];
 		
 		[dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]]; // GMT timezone
 		[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"]; // example: 2010-06-21T12:51:06Z
@@ -281,7 +280,6 @@
 		// Set locale to US to avoid formatting issues
 		NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"US"];
 		[dateFormatter setLocale:locale];
-		[locale release];
 		
 		[dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]]; // GMT timezone
 		[dateFormatter setDateFormat:@"yyyy-MM-dd"]; // example: 2010-06-21T12:51:06Z

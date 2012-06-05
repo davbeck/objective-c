@@ -55,17 +55,17 @@ static NSString * const CLWebItemDeletedAtKey  = @"CLWebItemDeletedAtKey";
 
 + (id)webItem
 {
-	return [[[[self class] alloc] init] autorelease];
+	return [[[self class] alloc] init];
 }
 
 + (id)webItemWithName:(NSString *)theName
 {
-	return [[[[self class] alloc] initWithName:theName] autorelease];
+	return [[[self class] alloc] initWithName:theName];
 }
 
 + (id)webItemWithName:(NSString *)theName type:(CLWebItemType)theType viewCount:(NSInteger)theCount
 {
-	return [[[[self class] alloc] initWithName:theName type:theType viewCount:theCount] autorelease];
+	return [[[self class] alloc] initWithName:theName type:theType viewCount:theCount];
 }
 
 - (NSString *)description
@@ -100,21 +100,21 @@ static NSString * const CLWebItemDeletedAtKey  = @"CLWebItemDeletedAtKey";
 {
 	if ((self = [super init])) {
 		if ([decoder allowsKeyedCoding]) {
-			_name       = [[decoder decodeObjectForKey:CLWebItemNameKey] retain];
+			_name       = [decoder decodeObjectForKey:CLWebItemNameKey];
 			_type       = [decoder decodeIntegerForKey:CLWebItemTypeKey];
 			_viewCount  = [decoder decodeIntegerForKey:CLWebItemViewCountKey];
-			_contentURL = [[decoder decodeObjectForKey:CLWebItemContentURLKey] retain];
-			_URL        = [[decoder decodeObjectForKey:CLWebItemURLKey] retain];
-			_mimeType   = [[decoder decodeObjectForKey:CLWebItemMimeTypeKey] retain];
-			_remoteURL  = [[decoder decodeObjectForKey:CLWebItemRemoteURLKey] retain];
-			_href       = [[decoder decodeObjectForKey:CLWebItemHrefKey] retain];
+			_contentURL = [decoder decodeObjectForKey:CLWebItemContentURLKey];
+			_URL        = [decoder decodeObjectForKey:CLWebItemURLKey];
+			_mimeType   = [decoder decodeObjectForKey:CLWebItemMimeTypeKey];
+			_remoteURL  = [decoder decodeObjectForKey:CLWebItemRemoteURLKey];
+			_href       = [decoder decodeObjectForKey:CLWebItemHrefKey];
 			_trashed    = [decoder decodeBoolForKey:CLWebItemTrashedKey];
 			_private    = [decoder decodeBoolForKey:CLWebItemPrivateKey];
-			_iconURL    = [[decoder decodeObjectForKey:CLWebItemIconURLKey] retain];
-			_icon       = [[decoder decodeObjectForKey:CLWebItemIconKey] retain];
-			_createdAt  = [[decoder decodeObjectForKey:CLWebItemCreatedAtKey] retain];
-			_updatedAt  = [[decoder decodeObjectForKey:CLWebItemUpdatedAtKey] retain];
-			_deletedAt  = [[decoder decodeObjectForKey:CLWebItemDeletedAtKey] retain];
+			_iconURL    = [decoder decodeObjectForKey:CLWebItemIconURLKey];
+			_icon       = [decoder decodeObjectForKey:CLWebItemIconKey];
+			_createdAt  = [decoder decodeObjectForKey:CLWebItemCreatedAtKey];
+			_updatedAt  = [decoder decodeObjectForKey:CLWebItemUpdatedAtKey];
+			_deletedAt  = [decoder decodeObjectForKey:CLWebItemDeletedAtKey];
 		}
 	}
 	return self;
@@ -144,32 +144,5 @@ static NSString * const CLWebItemDeletedAtKey  = @"CLWebItemDeletedAtKey";
 #pragma mark -
 #pragma mark Cleanup
 
-- (void)dealloc
-{
-    [_name release];
-	_name = nil;
-    [_contentURL release];
-	_contentURL = nil;
-    [_mimeType release];
-	_mimeType = nil;
-    [_remoteURL release];
-	_remoteURL = nil;
-    [_href release];
-	_href = nil;
-    [_iconURL release];
-	_iconURL = nil;
-    [_icon release];
-	_icon = nil;
-    [_URL release];
-	_URL = nil;
-    [_createdAt release];
-	_createdAt = nil;
-    [_updatedAt release];
-	_updatedAt = nil;
-    [_deletedAt release];
-	_deletedAt = nil;
-    
-	[super dealloc];
-}
 
 @end

@@ -21,14 +21,14 @@
 	id _internalContext;
 }
 
-@property (nonatomic, readwrite, retain) NSURLRequest *request;
-@property (nonatomic, readwrite, retain) NSHTTPURLResponse *response;
-@property (nonatomic, readwrite, retain) NSURLConnection *connection;
-@property (nonatomic, readwrite, retain) NSMutableData *receivedData;
+@property (nonatomic, readwrite, strong) NSURLRequest *request;
+@property (nonatomic, readwrite, strong) NSHTTPURLResponse *response;
+@property (nonatomic, readwrite, strong) NSURLConnection *connection;
+@property (nonatomic, readwrite, strong) NSMutableData *receivedData;
 @property (nonatomic, readwrite, assign) CLAPIRequestType requestType;
 @property (nonatomic, readwrite, copy) NSString *identifier;
-@property (nonatomic, readwrite, retain) id userInfo;
-@property (nonatomic, readwrite, retain) id internalContext;
+@property (nonatomic, readwrite, strong) id userInfo;
+@property (nonatomic, readwrite, strong) id internalContext;
 
 + (id)transaction;
 

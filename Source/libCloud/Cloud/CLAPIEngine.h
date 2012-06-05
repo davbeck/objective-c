@@ -22,7 +22,7 @@ extern NSString *const CLAPIEnginePrivacyOptionPublic;
 	NSString *_email;
 	NSString *_password;
     NSURL *_baseURL;
-	id<CLAPIEngineDelegate> _delegate;
+	id<CLAPIEngineDelegate> __unsafe_unretained _delegate;
 	
 	NSMutableSet *_transactions;
 	
@@ -31,9 +31,9 @@ extern NSString *const CLAPIEnginePrivacyOptionPublic;
 
 @property (nonatomic, readwrite, copy) NSString *email;
 @property (nonatomic, readwrite, copy) NSString *password;
-@property (nonatomic, readwrite, assign) id<CLAPIEngineDelegate> delegate;
-@property (nonatomic, readwrite, retain) NSURL *baseURL;
-@property (nonatomic, readwrite, retain) NSMutableSet *transactions;
+@property (nonatomic, readwrite, unsafe_unretained) id<CLAPIEngineDelegate> delegate;
+@property (nonatomic, readwrite, strong) NSURL *baseURL;
+@property (nonatomic, readwrite, strong) NSMutableSet *transactions;
 
 // This property makes the engine clear the cookies before making a new connection.  
 // This can be helpful when credentials are "stuck."

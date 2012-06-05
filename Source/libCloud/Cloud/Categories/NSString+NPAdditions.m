@@ -13,7 +13,7 @@
 
 + (NSString *)stringWithData:(NSData *)theData encoding:(NSStringEncoding)theEncoding
 {
-	return [[[NSString alloc] initWithData:theData encoding:theEncoding] autorelease];
+	return [[NSString alloc] initWithData:theData encoding:theEncoding];
 }
 
 + (NSString *)uniqueString

@@ -17,7 +17,7 @@
 
 + (id)transaction
 {
-	return [[[[self class] alloc] init] autorelease];
+	return [[[self class] alloc] init];
 }
 
 - (id)init
@@ -28,24 +28,5 @@
 	return self;
 }
 
-- (void)dealloc
-{
-    [_request release];
-    _request = nil;
-    [_response release];
-	_response = nil;
-    [_connection release];
-    _connection = nil;
-    [_receivedData release];
-    _receivedData = nil;
-    [_userInfo release];
-    _userInfo = nil;
-    [_identifier release];
-	_identifier = nil;
-    [_internalContext release];
-	_internalContext = nil;
-	
-    [super dealloc];
-}
 
 @end
