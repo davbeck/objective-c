@@ -10,7 +10,6 @@
 #import "CLWebItem.h"
 #import "CLAccount.h"
 #import "CLSocket.h"
-#import "JSON.h"
 #import "NSMutableURLRequest+NPPOSTBody.h"
 #import "NSString+NPMimeType.h"
 #import "NSURL+IFUnicodeURL.h"
@@ -214,9 +213,7 @@
 	if (data == nil || [data length] == 0)
 		return nil;
 	
-	NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	id object = [jsonString JSONValue];
-	[jsonString release];
+	id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
 	
 	if (object == nil || ![object isKindOfClass:[NSDictionary class]])
 		return nil;
@@ -229,9 +226,7 @@
 	if (data == nil || [data length] == 0)
 		return nil;
 	
-	NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	id object = [jsonString JSONValue];
-	[jsonString release];
+	id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
 	
 	if (object == nil || ![object isKindOfClass:[NSArray class]])
 		return nil;
