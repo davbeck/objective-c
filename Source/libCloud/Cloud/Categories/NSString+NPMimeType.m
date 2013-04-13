@@ -21,21 +21,23 @@
     
 	CFStringRef pathExtension = CFBridgingRetain([self pathExtension]);
     
-	if (pathExtension != NULL && CFStringGetLength(pathExtension) > 0) {
-        CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension, NULL);
-        
-        if (UTI != NULL) {
-            CFStringRef registeredType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
-            
-            if (registeredType != nil) {
-                mimeType = CFBridgingRelease(registeredType);
-            }
-        }
-        
-        CFRelease(UTI);
+	if (pathExtension != NULL) {
+		if (CFStringGetLength(pathExtension) > 0) {
+			CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension, NULL);
+			
+			if (UTI != NULL) {
+				CFStringRef registeredType = UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
+				
+				if (registeredType != nil) {
+					mimeType = CFBridgingRelease(registeredType);
+				}
+				
+				CFRelease(UTI);
+			}
+		}
+		
+		CFRelease(pathExtension);
     }
-    
-    CFRelease(pathExtension);
 	
     
     return mimeType;
